@@ -42,13 +42,13 @@ class Frame {
   };
 
  public:
-  Frame() noexcept = default;
+  constexpr Frame() noexcept = default;
 
   Frame(SourceImpl& source, std::string_view error, Time time);
 
   Frame(SourceImpl& source, std::unique_ptr<Image> image, Time time);
 
-  Frame(const Frame& frame) noexcept : m_impl{frame.m_impl} {
+  constexpr Frame(const Frame& frame) noexcept : m_impl{frame.m_impl} {
     if (m_impl) {
       ++m_impl->refcount;
     }

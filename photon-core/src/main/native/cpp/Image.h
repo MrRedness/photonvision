@@ -92,13 +92,13 @@ class Image {
     return cv::_InputArray{m_data};
   }
 
-  bool Is(int width_, int height_) {
+  constexpr bool Is(int width_, int height_) {
     return width == width_ && height == height_;
   }
-  bool Is(int width_, int height_, VideoMode::PixelFormat pixelFormat_) {
+  constexpr bool Is(int width_, int height_, VideoMode::PixelFormat pixelFormat_) {
     return width == width_ && height == height_ && pixelFormat == pixelFormat_;
   }
-  bool Is(int width_, int height_, VideoMode::PixelFormat pixelFormat_,
+  constexpr bool Is(int width_, int height_, VideoMode::PixelFormat pixelFormat_,
           int jpegQuality_) {
     // Consider +/-5 on JPEG quality to be "close enough"
     return width == width_ && height == height_ &&
@@ -106,16 +106,16 @@ class Image {
            (pixelFormat != VideoMode::kMJPEG || jpegQuality_ == -1 ||
             (jpegQuality != -1 && std::abs(jpegQuality - jpegQuality_) <= 5));
   }
-  bool IsLarger(int width_, int height_) {
+  constexpr bool IsLarger(int width_, int height_) {
     return width >= width_ && height >= height_;
   }
-  bool IsLarger(const Image& oth) {
+  constexpr bool IsLarger(const Image& oth) {
     return width >= oth.width && height >= oth.height;
   }
-  bool IsSmaller(int width_, int height_) {
+  constexpr bool IsSmaller(int width_, int height_) {
     return !IsLarger(width_, height_);
   }
-  bool IsSmaller(const Image& oth) {
+  constexpr bool IsSmaller(const Image& oth) {
     return !IsLarger(oth);
   }
 

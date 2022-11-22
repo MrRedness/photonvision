@@ -368,6 +368,12 @@ void UsbCameraImpl::ProcessFrame(IMFSample* videoSample,
                         tmpMat.total() * 2);
       tmpMat.copyTo(dest->AsMat());
       break;
+    case cs::VideoMode::PixelFormat::kUYVY:
+      tmpMat = cv::Mat(mode.height, mode.width, CV_8UC2, ptr, pitch);
+      dest = AllocImage(VideoMode::kUYVY, tmpMat.cols, tmpMat.rows,
+                        tmpMat.total() * 2);
+      tmpMat.copyTo(dest->AsMat());
+      break;
     default:
       doFinalSet = false;
       break;

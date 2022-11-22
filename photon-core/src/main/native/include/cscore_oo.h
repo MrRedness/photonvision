@@ -50,19 +50,19 @@ class VideoProperty {
     kEnum = CS_PROP_ENUM
   };
 
-  VideoProperty() = default;
+  constexpr VideoProperty() = default;
 
   std::string GetName() const;
 
-  Kind GetKind() const { return m_kind; }
+  constexpr Kind GetKind() const { return m_kind; }
 
   explicit operator bool() const { return m_kind != kNone; }
 
   // Kind checkers
-  bool IsBoolean() const { return m_kind == kBoolean; }
-  bool IsInteger() const { return m_kind == kInteger; }
-  bool IsString() const { return m_kind == kString; }
-  bool IsEnum() const { return m_kind == kEnum; }
+  constexpr bool IsBoolean() const { return m_kind == kBoolean; }
+  constexpr bool IsInteger() const { return m_kind == kInteger; }
+  constexpr bool IsString() const { return m_kind == kString; }
+  constexpr bool IsEnum() const { return m_kind == kEnum; }
 
   int Get() const;
   void Set(int value);
@@ -728,15 +728,15 @@ class VideoSink {
   VideoSink& operator=(VideoSink other) noexcept;
   ~VideoSink();
 
-  explicit operator bool() const { return m_handle != 0; }
+  explicit constexpr operator bool() const { return m_handle != 0; }
 
-  int GetHandle() const { return m_handle; }
+  constexpr int GetHandle() const { return m_handle; }
 
-  bool operator==(const VideoSink& other) const {
+  constexpr bool operator==(const VideoSink& other) const {
     return m_handle == other.m_handle;
   }
 
-  bool operator!=(const VideoSink& other) const { return !(*this == other); }
+  constexpr bool operator!=(const VideoSink& other) const { return !(*this == other); }
 
   /**
    * Get the kind of the sink.

@@ -116,7 +116,7 @@ class CvSource : public ImageSource {
  */
 class CvSink : public ImageSink {
  public:
-  CvSink() = default;
+  constexpr CvSink() = default;
 
   /**
    * Create a sink for accepting OpenCV images.

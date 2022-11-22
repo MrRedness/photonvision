@@ -66,31 +66,31 @@ struct VideoMode : public CS_VideoMode {
     kUnknown = CS_PIXFMT_UNKNOWN,
     kMJPEG = CS_PIXFMT_MJPEG,
     kYUYV = CS_PIXFMT_YUYV,
-    kYUYV = CS_PIXFMT_UYVY,
+    kUYVY = CS_PIXFMT_UYVY,
     kRGB565 = CS_PIXFMT_RGB565,
     kBGR = CS_PIXFMT_BGR,
     kGray = CS_PIXFMT_GRAY
   };
-  VideoMode() {
+  constexpr VideoMode() {
     pixelFormat = 0;
     width = 0;
     height = 0;
     fps = 0;
   }
-  VideoMode(PixelFormat pixelFormat_, int width_, int height_, int fps_) {
+  constexpr VideoMode(PixelFormat pixelFormat_, int width_, int height_, int fps_) {
     pixelFormat = pixelFormat_;
     width = width_;
     height = height_;
     fps = fps_;
   }
-  explicit operator bool() const { return pixelFormat == kUnknown; }
+  explicit constexpr operator bool() const { return pixelFormat == kUnknown; }
 
-  bool operator==(const VideoMode& other) const {
+  constexpr bool operator==(const VideoMode& other) const {
     return pixelFormat == other.pixelFormat && width == other.width &&
            height == other.height && fps == other.fps;
   }
 
-  bool operator!=(const VideoMode& other) const { return !(*this == other); }
+  constexpr bool operator!=(const VideoMode& other) const { return !(*this == other); }
 };
 
 /**
@@ -120,9 +120,9 @@ struct RawEvent {
     kUsbCamerasChanged = CS_USB_CAMERAS_CHANGED
   };
 
-  RawEvent() = default;
-  explicit RawEvent(RawEvent::Kind kind_) : kind{kind_} {}
-  RawEvent(std::string_view name_, CS_Handle handle_, RawEvent::Kind kind_)
+  constexpr RawEvent() = default;
+  explicit constexpt RawEvent(RawEvent::Kind kind_) : kind{kind_} {}
+  constexpr RawEvent(std::string_view name_, CS_Handle handle_, RawEvent::Kind kind_)
       : kind{kind_}, name{name_} {
     if (kind_ == kSinkCreated || kind_ == kSinkDestroyed ||
         kind_ == kSinkEnabled || kind_ == kSinkDisabled) {
@@ -131,12 +131,12 @@ struct RawEvent {
       sourceHandle = handle_;
     }
   }
-  RawEvent(std::string_view name_, CS_Source source_, const VideoMode& mode_)
+  constexpr RawEvent(std::string_view name_, CS_Source source_, const VideoMode& mode_)
       : kind{kSourceVideoModeChanged},
         sourceHandle{source_},
         name{name_},
         mode{mode_} {}
-  RawEvent(std::string_view name_, CS_Source source_, RawEvent::Kind kind_,
+  constexpr RawEvent(std::string_view name_, CS_Source source_, RawEvent::Kind kind_,
            CS_Property property_, CS_PropertyKind propertyKind_, int value_,
            std::string_view valueStr_)
       : kind{kind_},

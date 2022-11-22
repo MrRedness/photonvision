@@ -61,7 +61,7 @@ CS_Source CS_CreateRawSource(const char* name, const CS_VideoMode* mode,
 namespace cs {
 
 struct RawFrame : public CS_RawFrame {
-  RawFrame() {
+  constexpr RawFrame() {
     data = nullptr;
     dataLength = 0;
     pixelFormat = CS_PIXFMT_UNKNOWN;

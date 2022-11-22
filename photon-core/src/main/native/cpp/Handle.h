@@ -29,17 +29,17 @@ class Handle {
   };
   enum { kIndexMax = 0xffff };
 
-  Handle(CS_Handle handle) : m_handle(handle) {}  // NOLINT
-  operator CS_Handle() const { return m_handle; }
+  constexpr Handle(CS_Handle handle) : m_handle(handle) {}  // NOLINT
+  constexpr operator CS_Handle() const { return m_handle; }
 
-  Handle(int index, Type type) {
+  constexpr Handle(int index, Type type) {
     if (index < 0) {
       m_handle = 0;
       return;
     }
     m_handle = ((static_cast<int>(type) & 0x7f) << 24) | (index & 0xffff);
   }
-  Handle(int index, int property, Type type) {
+  constexpr Handle(int index, int property, Type type) {
     if (index < 0 || property < 0) {
       m_handle = 0;
       return;
@@ -48,13 +48,13 @@ class Handle {
                ((index & 0xff) << 16) | (property & 0xffff);
   }
 
-  int GetIndex() const { return static_cast<int>(m_handle) & 0xffff; }
-  Type GetType() const {
+  constexpr int GetIndex() const { return static_cast<int>(m_handle) & 0xffff; }
+  constexpr Type GetType() const {
     return static_cast<Type>((static_cast<int>(m_handle) >> 24) & 0xff);
   }
-  bool IsType(Type type) const { return type == GetType(); }
-  int GetTypedIndex(Type type) const { return IsType(type) ? GetIndex() : -1; }
-  int GetParentIndex() const {
+  constexpr bool IsType(Type type) const { return type == GetType(); }
+  constexpr int GetTypedIndex(Type type) const { return IsType(type) ? GetIndex() : -1; }
+  constexpr int GetParentIndex() const {
     return (IsType(Handle::kProperty) || IsType(Handle::kSinkProperty))
                ? (static_cast<int>(m_handle) >> 16) & 0xff
                : -1;

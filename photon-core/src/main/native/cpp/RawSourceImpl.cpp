@@ -24,15 +24,16 @@ RawSourceImpl::~RawSourceImpl() = default;
 void RawSourceImpl::PutFrame(const CS_RawFrame& image) {
   int type;
   switch (image.pixelFormat) {
-    case VideoMode::kYUYV:
+    case VideoMode::kYUYV: [[fallthrough]];
+    case VideoMode::kUYVY: [[fallthrough]];
     case VideoMode::kRGB565:
       type = CV_8UC2;
       break;
     case VideoMode::kBGR:
       type = CV_8UC3;
       break;
-    case VideoMode::kGray:
-    case VideoMode::kMJPEG:
+    case VideoMode::kGray: [[fallthrough]];
+    case VideoMode::kMJPEG: [[fallthrough]];
     default:
       type = CV_8UC1;
       break;
