@@ -222,6 +222,8 @@ public class MJPGFrameConsumer {
                 return "MJPEG";
             case kYUYV:
                 return "YUYV";
+            case kUYVY:
+                return "UYVY";
             case kRGB565:
                 return "RGB565";
             case kBGR:

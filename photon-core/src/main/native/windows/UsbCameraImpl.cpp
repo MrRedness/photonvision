@@ -472,6 +472,8 @@ static cs::VideoMode::PixelFormat GetFromGUID(const GUID& guid) {
     return cs::VideoMode::PixelFormat::kGray;
   } else if (IsEqualGUID(guid, MFVideoFormat_YUY2)) {
     return cs::VideoMode::PixelFormat::kYUYV;
+  } else if (IsEqualGUID(guid, MFVideoFormat_UYVY)) {
+    return cs::VideoMode::PixelFormat::kUYVY;
   } else if (IsEqualGUID(guid, MFVideoFormat_RGB24)) {
     return cs::VideoMode::PixelFormat::kBGR;
   } else if (IsEqualGUID(guid, MFVideoFormat_MJPG)) {

@@ -73,6 +73,7 @@ class Image {
     int type;
     switch (pixelFormat) {
       case VideoMode::kYUYV:
+      case VideoMode::kUYVY:
       case VideoMode::kRGB565:
         type = CV_8UC2;
         break;

@@ -451,6 +451,9 @@ void MjpegServerImpl::ConnThread::SendHTML(wpi::raw_ostream& os,
       case VideoMode::kYUYV:
         os << "YUYV";
         break;
+      case VideoMode::kUYVY:
+        os << "UYVY";
+        break;
       case VideoMode::kRGB565:
         os << "RGB565";
         break;
@@ -560,6 +563,9 @@ void MjpegServerImpl::ConnThread::SendJSON(wpi::raw_ostream& os,
       case VideoMode::kYUYV:
         os << "YUYV";
         break;
+      case VideoMode::kYUYV:
+        os << "YUYV";
+        break;
       case VideoMode::kRGB565:
         os << "RGB565";
         break;
@@ -616,8 +622,8 @@ MjpegServerImpl::MjpegServerImpl(std::string_view name, wpi::Logger& logger,
   m_serverThread = std::thread(&MjpegServerImpl::ServerThreadMain, this);
 }
 
-MjpegServerImpl::~MjpegServerImpl() {
-  Stop();
+MjpegServerImpl::~MjpegServerImpl() { 
+  Stop(); 
 }
 
 void MjpegServerImpl::Stop() {
@@ -741,6 +747,7 @@ void MjpegServerImpl::ConnThread::SendStream(wpi::raw_socket_ostream& os) {
         addDHT = JpegNeedsDHT(data, &size, &locSOF);
         break;
       case VideoMode::kYUYV:
+      case VideoMode::kUVYV:
       case VideoMode::kRGB565:
       default:
         // Bad frame; sleep for 10 ms so we don't consume all processor time.
