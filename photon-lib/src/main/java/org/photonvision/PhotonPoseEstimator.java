@@ -255,7 +255,6 @@ public class PhotonPoseEstimator {
     }
 
     private Optional<EstimatedRobotPose> multiTagPNPStrategy(PhotonPipelineResult result) {
-
         // Arrays we need declared up front
         var visCorners = new ArrayList<TargetCorner>();
         var knownVisTags = new ArrayList<AprilTag>();
@@ -275,7 +274,6 @@ public class PhotonPoseEstimator {
 
         // multi-target solvePNP
         if (result.getTargets().size() > 1) {
-
             var pnpResults =
                     VisionEstimation.estimateCamPosePNP(
                             result.getFrameProperties(), visCorners, knownVisTags);
